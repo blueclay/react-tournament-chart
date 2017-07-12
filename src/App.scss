@@ -1,0 +1,152 @@
+$font-stack: proxima-nova, proxima-nova-1, proxima-nova-2, "Proxima Nova", arial, helvetica, sans-serif;
+body {
+    background: #F2F2F2;
+    margin: 0;
+}
+* { box-sizing: border-box; }
+body, html { height: 100%; width: 100%; }
+#canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#regionContainer {
+    height: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.region {
+    height: 100%;
+    position: relative;
+    z-index: 1;
+    
+    .region-name {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        line-height: 0;
+        margin: -18px 0 0;
+        padding: 0;
+        font: 600 30px $font-stack;
+    }
+}
+
+.round {
+    font: 300 15px $font-stack;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+    padding: 0 20px;
+    float: left;
+    width: 33.3333333333%;
+    position: relative;
+    z-index: 2;
+    pointer-events: none;
+    
+    &.round-collapse {
+        margin-left: -16.666666666%;
+    }
+    
+    .game {
+        background: #FFF;
+        border-radius: 3px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, .05);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        max-height: 80px;
+        pointer-events: auto;
+        
+        .team {
+            display: flex;
+            align-items: center;
+            flex: 1 1 40px;
+            cursor: pointer;
+            border-left: 10px solid #DDD;
+            transition: .2s;
+            /* keep this for smoother transitions: */
+            box-shadow: inset 0 40px 0 rgba(255, 255, 255, 0);
+
+            .team-seed {
+                font-size: 10px;
+                color: #999;
+                flex: 0 1 30px;
+                text-align: center;
+                transition: .2s;
+            }
+            .team-name {
+                flex: 1 1 auto;
+                white-space: nowrap;           
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .team-score {
+                font-weight: 600;
+                flex: 0 1 30px;
+                &:empty {
+                    display: none;
+                }
+            }
+            .team-date {
+                
+            }
+                
+            &.team-hover {
+                background: #CFC59A;
+                color: #FFF !important;
+                box-shadow: inset 0 40px 0 rgba(255, 255, 255, .2);
+                .team-seed {
+                    color: #FFF;
+                }
+            }
+            
+            &:active {
+                box-shadow: inset 0 40px 0 rgba(255, 255, 255, 0);
+            }
+            
+            &.team-loser {
+                background: #F7F7F7;
+                color: #BBB;
+            }
+        }
+    }
+}
+
+.region-right .round {
+    float: right;
+    
+    &.round-collapse {
+        margin-left: 0;
+        margin-right: -16.666666666%;
+    }
+    
+    .team {
+        border-left: 0;
+        border-right: 10px solid #DDD;
+        flex-direction: row-reverse;
+        text-align: right;
+    }
+}
+
+.round .game {
+    .team-florida          { border-color: #0020A5; }
+    .team-ua-ms-mary       { border-color: #908458; }
+    .team-colorado         { border-color: #090907; }
+    .team-pitt             { border-color: #CFC59A; }
+    .team-ucla             { border-color: #0073CF; }
+    .team-tulsa            { border-color: #064A99; }
+    .team-vcu              { border-color: #000000; }
+    .team-stephen-f-austin { border-color: #330066; }
+    .team-kansas           { border-color: #0018A8; }
+    .team-eastern-kentucky { border-color: #760018; }
+    .team-new-mexico       { border-color: #CC003D; }
+    .team-stanford         { border-color: #8C1515; }
+    .team-syracuse         { border-color: #FF5113; }
+    .team-western-mich     { border-color: #62390E; }
+    .team-ohio-st          { border-color: #AD0F20; }
+    .team-dayton           { border-color: #C40023; }
+}
