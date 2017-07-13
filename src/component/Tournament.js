@@ -15,33 +15,26 @@ class Tournament extends Component {
         ratio: window.devicePixelRatio || 1,
       },
       context: null,
-      roundMidpoints: null,
       updateCanvas: false,
       hoverTargetClass: null,
     }
+    this.teamMidpoints = [];
   }
   
-  broadcastRoundMidpoints = (rndNum) => {    
-    return (midpoint) => {
-      let roundMidpoints = this.state.roundMidpoints;
-      if (!roundMidpoints) {
-        return;
-      }
+  broadcastMidpoints = (rndNum) => (midpoint) => {
+    let matchesInRound = this.teamMidpoints[rndNum];
+    if (!matchesInRound) {
+      matchesInRound = {
+        matches: [],
+      };
+    }
+    
+    matchesInRound.matches.push(midpoint); // object with team1 and team2
 
-      let matchesInRound = roundMidpoints[rndNum];
-      if (!matchesInRound) {
-        matchesInRound = {
-          matches: [],
-        };
-      }
-      
-      matchesInRound.matches.push(midpoint); // object with team1 and team2
-
-      if (!roundMidpoints.length) {
-        roundMidpoints.push(matchesInRound);
-      } else {
-        roundMidpoints[rndNum] = matchesInRound;
-      }     
+    if (!this.teamMidpoints.length) {
+      this.teamMidpoints.push(matchesInRound);
+    } else {
+      this.teamMidpoints[rndNum] = matchesInRound;
     }
   }
 
@@ -51,7 +44,7 @@ class Tournament extends Component {
     })
   }
 
-  drawConnectors(roundMidpoints) {
+  drawConnectors(teamMidpoints) {
     const radius = 10;
     const color = '#593';
     const linewidth = 3;
@@ -60,7 +53,7 @@ class Tournament extends Component {
       return;
     }
 
-    roundMidpoints
+    teamMidpoints
       .map(mapRound)
       .map(mapConnectors)
       .forEach((round, index, arr) => {
@@ -104,21 +97,16 @@ class Tournament extends Component {
     });
   }
 
-  componentWillMount() {
-    this.setState({
-      roundMidpoints: [],
-    });
-  }
-
   componentDidUpdate() {    
-    this.drawConnectors(this.state.roundMidpoints);   
+    this.drawConnectors(this.teamMidpoints);   
 
     if (this.state.updateCanvas) {
       this.setState({
         updateCanvas: false,
-        roundMidpoints: [],
       });
     }
+
+    this.teamMidpoints = [];
   }
 
   componentDidMount() {   
@@ -143,7 +131,7 @@ class Tournament extends Component {
         {
           rounds.map(mapRound).map((round, index, arr) => (
             <Round
-              handleBroadcastMidpoints={this.broadcastRoundMidpoints(index)}
+              handleBroadcastMidpoints={this.broadcastMidpoints(index)}
               matches={round.matches}
               key={'round-'+index}
               showCollapse={round.showCollapse}
