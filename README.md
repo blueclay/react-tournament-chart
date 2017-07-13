@@ -18,7 +18,7 @@ This project is inspired by the best Tournament Brackets built with jQuery (Than
 
 ## Sending Feedback
 
-We are always open to [your feedback](https://github.com/facebookincubator/create-react-app/issues).
+We are always open to [your feedback](https://github.com/blueclay/react-tournament-chart/issues).
 
 ## Available Scripts
 
