@@ -2,7 +2,7 @@
   "name": "react-tournament-chart",
   "version": "0.1.0",
   "private": true,
-  "Home": "blueclay.github.io/react-tournament-chart",
+  "Home": "https://blueclay.github.io/react-tournament-chart/",
   "dependencies": {
     "react": "^15.6.1",
     "react-dom": "^15.6.1"
