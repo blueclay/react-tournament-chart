@@ -1,5 +1,7 @@
 ## Description
 
+DEMO page: https://blueclay.github.io/react-tournament-chart/
+
 This project is inspired by the "Best Tournament Brackets" (https://codepen.io/kaioe/pen/Nxovvv) built using jQuery. The CSS, HTML and canvas drawing calculations comes from the same site.
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
